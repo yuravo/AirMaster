@@ -327,6 +327,14 @@ background: var(--surface);
 .works-gallery img:hover {
   transform: scale(1.03);
 }
+body.lightbox-open {
+  overflow: hidden;
+}
+
+.blur-background {
+  filter: blur(6px);
+  transition: filter 0.3s ease;
+}
 
 .gallery img {
   width: 100%;
@@ -411,12 +419,15 @@ background: var(--surface);
 }
 
 .review-photo {
-  width: 100%;
-  height: auto;
-  display: block;
-  border-radius: var(--radius) var(--radius) 0 0;
-  margin: 0;
+  width: 600px;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 2px solid #000000;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  margin-bottom: 10px;
 }
+
 
 .review p {
   margin: 0;

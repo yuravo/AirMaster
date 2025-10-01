@@ -42,15 +42,29 @@ setInterval(loadPrices, 30000);
 document.querySelectorAll('.gallery img, .qr-block img, .review img').forEach(img => {
   img.style.cursor = "zoom-in";
   img.addEventListener('click', () => {
+    // Добавляем размытие
+    document.body.classList.add('lightbox-open');
+    document.querySelectorAll('main, header, footer').forEach(el => {
+      el.classList.add('blur-background');
+    });
+
+    // Создаём лайтбокс
     const lightbox = document.createElement('div');
     lightbox.className = 'lightbox active';
     lightbox.innerHTML = `<img src="${img.src}" alt="${img.alt}">`;
     document.body.appendChild(lightbox);
 
     // Закрытие по клику
-    lightbox.addEventListener('click', () => lightbox.remove());
+    lightbox.addEventListener('click', () => {
+      lightbox.remove();
+      document.body.classList.remove('lightbox-open');
+      document.querySelectorAll('main, header, footer').forEach(el => {
+        el.classList.remove('blur-background');
+      });
+    });
   });
 });
+
 
 
 
