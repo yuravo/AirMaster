@@ -8,6 +8,17 @@
   --radius: 12px;
   --shadow: 0 6px 20px rgba(0,0,0,.06);
 }
+.tag {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 2px 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #fff;
+  background: #f59e0b; /* тёплый жёлто-оранжевый */
+  border-radius: 6px;
+  vertical-align: middle;
+}
 
 html {
   scroll-behavior: smooth;
