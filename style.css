@@ -7,6 +7,7 @@
   --brand-dark: #d97706;
   --radius: 12px;
   --shadow: 0 6px 20px rgba(0,0,0,.06);
+  --header-height: 110px;
 }
 
 .tag {
@@ -171,13 +172,7 @@ p { margin: 0 0 1em; color: var(--muted); }
   justify-content: center;
   text-align: center;
   color: #fff;
-}
-
-.hero::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(0,0,0,0.45);
+  margin-top: var(--header-height);
 }
 
 .hero .container {
@@ -553,7 +548,6 @@ body.lightbox-open footer {
     display: none !important;
   }
 }
-
 @media (max-width: 680px) {
   .gallery { grid-template-columns: 1fr; }
   .reviews,
