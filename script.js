@@ -40,46 +40,40 @@ lightbox.innerHTML = `
     <button id="next">›</button>
   </div>
 `;
-document.body.appendChild(lightbox);
-
 document.addEventListener("DOMContentLoaded", () => {
-  const lightbox = document.getElementById("lightbox");
+  const lightbox = document.querySelector(".lightbox");
   const lightboxImg = lightbox.querySelector("img");
   const closeBtn = lightbox.querySelector(".close");
   const prevBtn = lightbox.querySelector("#prev");
   const nextBtn = lightbox.querySelector("#next");
+  const caption = lightbox.querySelector(".lightbox-caption");
 
   const allImages = document.querySelectorAll(".works-gallery img");
-  const cover = document.querySelector(".works-cover img");
+  const worksCover = document.querySelector(".works-cover");
   let currentIndex = 0;
 
   function showImage(index) {
     currentIndex = index;
     lightboxImg.src = allImages[index].src;
+    caption.textContent = `Фото ${index + 1} из ${allImages.length}`;
     lightbox.classList.add("active");
     document.body.classList.add("no-scroll");
   }
 
-  allImages.forEach((img, index) => {
-    img.style.cursor = "zoom-in";
-    img.addEventListener("click", () => showImage(index));
-  });
-
-  if (cover) {
-    cover.style.cursor = "zoom-in";
-    cover.addEventListener("click", () => showImage(0));
+  if (worksCover) {
+    worksCover.addEventListener("click", () => showImage(0));
   }
 
-  function closeLightbox() {
+  closeBtn.addEventListener("click", () => {
     lightbox.classList.remove("active");
     document.body.classList.remove("no-scroll");
-  }
-  closeBtn.addEventListener("click", closeLightbox);
+  });
 
   prevBtn.addEventListener("click", () => {
     currentIndex = (currentIndex - 1 + allImages.length) % allImages.length;
     showImage(currentIndex);
   });
+
   nextBtn.addEventListener("click", () => {
     currentIndex = (currentIndex + 1) % allImages.length;
     showImage(currentIndex);
@@ -87,25 +81,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   document.addEventListener("keydown", e => {
     if (!lightbox.classList.contains("active")) return;
-    if (e.key === "Escape") closeLightbox();
+    if (e.key === "Escape") closeBtn.click();
     if (e.key === "ArrowLeft") prevBtn.click();
     if (e.key === "ArrowRight") nextBtn.click();
-  });
-
-  let startX = 0;
-  lightbox.addEventListener("touchstart", e => {
-    startX = e.touches[0].clientX;
-  });
-  lightbox.addEventListener("touchend", e => {
-    const endX = e.changedTouches[0].clientX;
-    const diff = endX - startX;
-    if (Math.abs(diff) > 50) {
-      if (diff > 0) {
-        prevBtn.click(); 
-      } else {
-        nextBtn.click(); 
-      }
-    }
   });
 });
 

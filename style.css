@@ -108,19 +108,19 @@ p { margin: 0 0 1em; color: var(--muted); }
   }
 }
 
-.works-gallery { display: grid; }
-.works-cover { display: none; }
-
-@media (max-width: 768px) {
-  .works-gallery { display: none !important; }
-  .works-cover { display: block !important; }
+.works-gallery {
+  display: none !important;
+  visibility: hidden;
+  height: 0;
+  overflow: hidden;
 }
 
 .works-cover {
-  display: none;
   text-align: center;
   cursor: pointer;
+  margin-bottom: 20px;
 }
+
 .works-cover img {
   width: 100%;
   max-height: 200px;
@@ -128,6 +128,7 @@ p { margin: 0 0 1em; color: var(--muted); }
   border-radius: var(--radius);
   box-shadow: var(--shadow);
 }
+
 .works-cover p {
   margin-top: 8px;
   font-weight: 600;
@@ -135,8 +136,9 @@ p { margin: 0 0 1em; color: var(--muted); }
 }
 
 @media (max-width: 768px) {
-  .works-gallery { display: none; }
-  .works-cover { display: block; }
+  .works-gallery {
+    display: none !important;
+  }
 }
 
 .btn {
@@ -346,37 +348,67 @@ p { margin: 0 0 1em; color: var(--muted); }
   align-items: center;
   flex-direction: column;
   z-index: 2000;
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
-.lightbox.active { display: flex; }
+.lightbox.active {
+  display: flex;
+  opacity: 1;
+}
 .lightbox img {
   max-width: 90%;
   max-height: 80%;
   border-radius: 8px;
+  box-shadow: 0 0 30px rgba(0,0,0,0.6);
+  animation: fadeIn 0.4s ease;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
 }
 .lightbox .close {
   position: absolute;
   top: 20px; right: 30px;
-  font-size: 2rem;
+  font-size: 2.5rem;
   color: #fff;
   cursor: pointer;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+.lightbox .close:hover {
+  color: #ff5252;
+  transform: rotate(90deg);
 }
 .lightbox-nav {
-  margin-top: 10px;
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 30px;
+  transform: translateY(-50%);
 }
 .lightbox-nav button {
-  background: none;
+  background: rgba(255,255,255,0.15);
   border: none;
-  font-size: 2rem;
+  font-size: 2.5rem;
   color: #fff;
   cursor: pointer;
-  margin: 0 20px;
+  padding: 10px 20px;
+  border-radius: 50%;
+  transition: background 0.3s ease, transform 0.2s ease;
 }
-body.lightbox-open main,
-body.lightbox-open header,
-body.lightbox-open footer {
-  filter: blur(6px);
-  pointer-events: none;
-  user-select: none;
+.lightbox-nav button:hover {
+  background: rgba(255,255,255,0.3);
+  transform: scale(1.1);
+}
+.lightbox-caption {
+  margin-top: 15px;
+  color: #ccc;
+  font-size: 1rem;
+  text-align: center;
+}
+body.no-scroll {
+  overflow: hidden;
 }
 
 .price-list {
