@@ -87,6 +87,11 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
+const nav = document.querySelector('.nav');
+burger.addEventListener('click', () => {
+  nav.classList.toggle('active');
+});
+
 const observer = new IntersectionObserver(entries => {
   entries.forEach(e => {
     if (e.isIntersecting) e.target.classList.add('visible');

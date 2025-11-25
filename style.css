@@ -65,48 +65,53 @@ p { margin: 0 0 1em; color: var(--muted); }
   padding: 14px 0;
 }
 
-.brand h1 {
-  font-size: 1.6rem;
+.brand h2 {
+  font-size: 1.4rem;
   margin: 0;
   color: var(--brand-dark);
+  line-height: 1.3;
 }
+
 .brand .sub {
   font-size: 1rem;
   color: var(--muted);
-  margin: 0;
+  margin: 2px 0 0 0;
 }
 
+/* Навигация */
 .nav {
   display: flex;
-  justify-content: flex-start;
-  align-items: center;
   gap: 30px;
-  white-space: nowrap;       
 }
+
 .nav a {
   text-decoration: none;
   font-weight: 600;
   color: var(--text);
   transition: color .2s;
 }
+
 .nav a:hover { color: var(--brand-dark); }
 
 
 @media (max-width: 768px) {
-  .nav {
-    display: none !important;
-  }
   .header-wrap {
-    justify-content: center; 
-    padding: 10px 0;
+    flex-direction: column;   /* элементы ставим вертикально */
+    align-items: center;      /* центрируем логотип */
+    padding: 8px 10px;        /* уменьшили паддинг */
   }
+  
   .brand h1 {
-    font-size: 1.2rem;
+    font-size: 1rem;          /* ещё меньше на телефоне */
+    text-align: center;
   }
+  
   .brand .sub {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
+    text-align: center;
   }
 }
+
 
 .works-gallery {
   display: none !important;
@@ -168,67 +173,99 @@ p { margin: 0 0 1em; color: var(--muted); }
 .hero {
   position: relative;
   background: url("media/hero.png") top center / cover no-repeat;
-  height: 1000px; 
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
   color: #fff;
-  margin-top: var(--header-height);
+  margin-top:0;
+  height: 800px; /* начальная высота */
 }
 
-.hero .container {
-  position: relative;
-  z-index: 1;
-}
-
-.hero h1 {
-  font-size: 2.4rem;
-  margin-bottom: 16px;
-  color: var(--brand-dark);
-}
-.hero .subtitle {
-  font-size: 1.2rem;
-  color: var(--muted);
-  margin-bottom: 30px;
-}
-.hero-highlights {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 16px;
-  margin-bottom: 30px;
-}
 .hero-text.overlay {
   background: rgba(0,0,0,0.55);
-  color: var(--brand-dark);     
+  color: #fff;
   padding: 20px;
   border-radius: var(--radius);
   display: inline-block;
 }
 
-.hero-text.overlay h1,
+.hero-text.overlay h1 {
+  color: #fff;
+  font-size: 2rem;
+  margin-bottom: 16px;
+  line-height: 1.3;
+}
+
 .hero-text.overlay p {
-  color: #fff; 
+  color: #fff;
+  font-size: 1rem;
+  margin-bottom: 0;
 }
 
-@media (max-width: 920px) {
+/* --- Адаптивность --- */
+@media (max-width: 768px) {
+  .header-wrap {
+    flex-direction: column;
+    align-items: center;
+    padding: 8px 10px;
+  }
+
+  .brand h2 {
+    font-size: 1rem;
+    text-align: center;
+  }
+  .brand .sub {
+    font-size: 0.75rem;
+    text-align: center;
+  }
+
+  .nav {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 55px;
+    right: 10px;
+    background: var(--bg);
+    border: 1px solid var(--brand);
+    border-radius: var(--radius);
+    padding: 10px 15px;
+    gap: 10px;
+    box-shadow: var(--shadow);
+  }
+
+  .nav.active {
+    display: flex;
+  }
+
   .hero {
-    height: 300px;
-    padding: 40px 0;
+    margin-top:0;
+    height: 280px;
+    padding: 20px 10px;
+  }
+
+  .hero-text.overlay h1 {
+    font-size: 1.2rem;
+  }
+
+  .hero-text.overlay p {
+    font-size: 0.85rem;
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 480px) {
   .hero {
+    margin-top: 50px;
     height: 220px;
-    padding: 30px 0;
+    padding: 15px 10px;
   }
-  .hero h1 {
-    font-size: 1.4rem;
-    line-height: 1.3;
+
+  .hero-text.overlay h1 {
+    font-size: 1rem;
   }
-  .hero .subtitle {
-    font-size: 0.95rem;
+
+  .hero-text.overlay p {
+    font-size: 0.8rem;
   }
 }
 .highlight {
@@ -314,31 +351,6 @@ p { margin: 0 0 1em; color: var(--muted); }
   font-size: 1rem;
 }
 
-.works-gallery {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 16px;
-}
-.work-item {
-  background: var(--surface);
-  border-radius: var(--radius);
-  overflow: hidden;
-  box-shadow: var(--shadow);
-  cursor: zoom-in;
-  transition: transform .2s ease, box-shadow .2s ease;
-}
-.work-item:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 28px rgba(0,0,0,.15);
-}
-.work-item img {
-  width: 100%;               
-  height: 220px;             
-  object-fit: cover;         
-  border-radius: 12px;       
-  box-shadow: 0 6px 16px rgba(0,0,0,.1); 
-  transition: transform 0.3s ease;       
-}
 .lightbox {
   position: fixed;
   inset: 0;
